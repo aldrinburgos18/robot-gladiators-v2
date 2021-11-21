@@ -4,9 +4,6 @@
 //    ** Defeat eacg enemy-robots
 //"LOSE" - Player robot's health is zero or less
 
-//Alert players that they are starting the game
-window.alert("Welcome to Robot Gladiators!");
-
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -82,7 +79,20 @@ var fight = function (enemyName) {
 };
 
 for (var i = 0; i < enemyNames.length; i++) {
-  var pickedEnemyName = enemyNames[i];
-  enemyHealth = 50;
-  fight(pickedEnemyName);
+  if (playerHealth > 0) {
+    //Alert players that they are starting the game
+    window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+
+    //pick new enemy to fight based on the index of the enemyNames array
+    var pickedEnemyName = enemyNames[i];
+
+    //reset enemyHealth before starting new round
+    enemyHealth = 50;
+
+    //pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+    fight(pickedEnemyName);
+  } else {
+    window.alert("You have lost your robot in battle! Game over!");
+    break;
+  }
 }
